@@ -44,9 +44,25 @@ public class MyWebApp extends HttpServlet {
 		}
 
 		/**
-		 * 1.Build The Client
+		 * @Invoking the Google Maps Web Services
+		 */
+
+		/**
+		 * 1.Build The Client if @Http protocol is used we can go for this it is
+		 * not storing any key store or store since it is http
 		 */
 		Client client = ClientBuilder.newClient();
+		System.out.println(client.getClass().getName());
+
+		/**
+		 * if @Https protocol is used we can go for this Here @builder DESIGN
+		 * PATTERN and it is a part of creational group
+		 * 
+		 * design patterns are divide as groups creational behavioral
+		 * observational strategy
+		 */
+		// ClientBuilder builder = ClientBuilder.newBuilder();
+		// Client client = builder.build();
 
 		/**
 		 * 2.Set The target
@@ -56,7 +72,12 @@ public class MyWebApp extends HttpServlet {
 		/**
 		 * 3.Get The Response
 		 */
-		Response respons = target.request(contentType).get();
+		Response respons = target
+							.request()
+							.accept(contentType)
+							.header("myName", "Pradeep")
+							.cookie("id", "1234")
+							.get();
 
 		/**
 		 * 4.Process The Response
